@@ -11,7 +11,6 @@
  */
 
 function aggregateChildren(nodes: Node[] | null): Node[] {
-    console.log(nodes)
     
     return nodes.flatMap((node) => node.children)
     
