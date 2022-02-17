@@ -4,17 +4,20 @@ object Solution {
     (domino(0) == otherDomino(0) && domino(1) == otherDomino(1)) ||
       (domino(0) == otherDomino(1) && domino(1) == otherDomino(0))
 
-  def howManyTimesIn(domino: Array[Int], dominoes: Array[Array[Int]]): Int =
-    dominoes.count(dominoEquivalent(_, domino))
+  def numEquivDominoPairsTail(dominoes: Array[Array[Int]], acc: Int): Int = {
 
+    if (dominoes.length == 1) return acc
+
+    val cur = dominoes.tail.count(
+      dominoEquivalent(_, dominoes.head)
+    ) + acc
+      
+    numEquivDominoPairsTail(dominoes.tail, cur)
+
+  }
+    
   def numEquivDominoPairs(dominoes: Array[Array[Int]]): Int = {
-
-    if (dominoes.length == 1) return 0
-
-    howManyTimesIn(dominoes.head, dominoes.tail) + numEquivDominoPairs(
-      dominoes.tail
-    )
-
+    numEquivDominoPairsTail(dominoes, 0)
   }
     
 }
