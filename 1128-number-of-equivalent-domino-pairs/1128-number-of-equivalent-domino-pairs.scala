@@ -6,8 +6,7 @@ object Solution {
     (domino(0) == otherDomino(0) && domino(1) == otherDomino(1)) ||
       (domino(0) == otherDomino(1) && domino(1) == otherDomino(0))
 
-  @tailrec
-  def numEquivDominoPairsTail(dominoes: Array[Array[Int]], acc: Int): Int = {
+  @tailrec def numEquivDominoPairsTail(dominoes: Array[Array[Int]], acc: Int): Int = {
 
     if (dominoes.length == 1) return acc
 
