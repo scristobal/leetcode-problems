@@ -27,6 +27,6 @@ func removeAllAtoms(s string) string {
 
 func isValid(s string) bool {
 
-	n := removeAllAtoms(s)
-	return len(n) == 0
+	leftOvers := removeAllAtoms(s)
+	return leftOvers == ""
 }
