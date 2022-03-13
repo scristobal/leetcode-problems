@@ -1,23 +1,29 @@
 
-func numEquivDominoPairs(dominoes [][]int) int {
-	if len(dominoes) == 1 {
-		return 0
+func hash(d []int) int {
+	if d[0] > d[1] {
+		return (d[0] * 10) + d[1]
 	}
-	return howMany(dominoes[0], dominoes[1:]) + numEquivDominoPairs(dominoes[1:])
+	return (d[1] * 10) + d[0]
 }
 
-func equivalent(domino []int, otherDomino []int) bool {
-	return (domino[0] == otherDomino[0] && domino[1] == otherDomino[1]) || (domino[0] == otherDomino[1] && domino[1] == otherDomino[0])
-}
+func numEquivDominoPairs(ds [][]int) int {
 
-func howMany(domino []int, dominoes [][]int) int {
+	var acc = make(map[int]int)
 
-	count := 0
-	for _, otherDomino := range dominoes {
-		if equivalent(domino, otherDomino) {
-			count++
-		}
+	for _, d := range ds {
+
+		h := hash(d)
+
+		cur := acc[h]
+
+		acc[h] = cur + 1
+
+	}
+	res := 0
+	for _, c := range acc {
+
+		res += c * (c - 1) / 2
 	}
 
-	return count
+	return res
 }
