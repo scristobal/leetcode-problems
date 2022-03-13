@@ -8,24 +8,16 @@ object Solution {
   }
 
   def numEquivDominoPairs(dominoes: Array[Array[Int]]): Int = {
-    val cache = collection.mutable.Map.empty[Int, Int]
+    val cache = collection.mutable.Map.empty[Int, Int].withDefaultValue(0)
 
     dominoes.foreach(d => {
       val h = hash(d)
     
-      cache.update(h, cache.getOrElse(h, 0) + 1)
+      cache.update(h, cache(h) + 1)
 
     })
-
-    var res = 0
       
-    cache.foreach{case (_, v) => {
-      if (v > 1) {
-        res = res + v * (v - 1) / 2
-      }
-    }}
-
-    res
+    cache.values.map(c =>  c * (c - 1) / 2).sum
 
   }
 
