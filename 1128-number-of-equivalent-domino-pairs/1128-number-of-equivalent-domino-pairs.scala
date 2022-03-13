@@ -1,25 +1,35 @@
-import scala.annotation.tailrec
 
 object Solution {
-
-  def dominoEquivalent(domino: Array[Int], otherDomino: Array[Int]): Boolean =
-    (domino(0) == otherDomino(0) && domino(1) == otherDomino(1)) ||
-      (domino(0) == otherDomino(1) && domino(1) == otherDomino(0))
-
-  @tailrec def numEquivDominoPairsTail(dominoes: Array[Array[Int]], acc: Int): Int = {
-
-    if (dominoes.length == 1) return acc
-
-    val cur = dominoes.tail.count(
-      dominoEquivalent(_, dominoes.head)
-    ) + acc
-      
-    numEquivDominoPairsTail(dominoes.tail, cur)
-
+ def hash(d: Array[Int]): Int = {
+    if (d(0) > d(1)) {
+      return (d(0) * 10) + d(1)
+    }
+    (d(1) * 10) + d(0)
   }
-    
+
   def numEquivDominoPairs(dominoes: Array[Array[Int]]): Int = {
-    numEquivDominoPairsTail(dominoes, 0)
+    val cache = collection.mutable.Map.empty[Int, Int]
+
+    dominoes.foreach(d => {
+      val h = hash(d)
+    
+      cache.update(h, cache.getOrElse(h, 0) + 1)
+
+    })
+
+    var res = 0
+      
+    cache.foreach{case (_, v) => {
+      if (v > 1) {
+        res = res + v * (v - 1) / 2
+      }
+    }}
+
+    res
+
   }
+
     
 }
+
+
