@@ -1,15 +1,15 @@
 func twoSum(nums []int, target int) []int {
     var visited = make(map[int]int)
     
-    for i := range nums {
+    for i, v := range nums {
         
-        j, ok := visited[target - nums[i]]
+        j, ok := visited[target - v]
         
         if ok { 
             return []int{i, j} 
         }
         
-        visited[nums[i]] = i
+        visited[v] = i
         
     }
     
