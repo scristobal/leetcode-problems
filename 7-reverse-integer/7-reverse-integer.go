@@ -32,7 +32,7 @@ func reverse(x int) int {
         
     }
     
-    if (-math.Pow(2.0,32.0) <= float64(y) ) && (float64(y) <= (math.Pow(2.0,31.0) -1.0) ) { 
+    if y <= math.MaxInt32 { 
         if x >= 0 { return y} else {return -y}
     }
     
