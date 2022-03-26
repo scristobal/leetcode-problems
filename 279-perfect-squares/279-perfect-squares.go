@@ -11,16 +11,19 @@ func squares(n int) []int {
 		i = (math.Pow(float64(j+1), 2))
 	}
 
-	return res[:j]
+	inv := make([]int, j)
+
+	for i := j - 1; i >= 0; i-- {
+		inv[j-i-1] = res[i]
+	}
+
+	return inv
 }
 
 func numSquaresRecur(n int, sq []int, l int, b int) int {
 
-
 	for _, s := range sq {
-		if s > n {
-			break
-		}
+
 		if s == n {
 			return 1
 		}
@@ -43,6 +46,8 @@ func numSquaresRecur(n int, sq []int, l int, b int) int {
 func numSquares(n int) int {
 
 	sq := squares(n)
+
+	fmt.Println(sq)
 
 	return numSquaresRecur(n, sq, 0, n)
 }
