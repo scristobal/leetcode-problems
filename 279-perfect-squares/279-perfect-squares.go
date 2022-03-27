@@ -1,6 +1,6 @@
 func numSquares(n int) int {
 
-	numSquares := make(map[int]int, n+1)
+	numSquares := make([]int, n+1)
 
 	for i := 1; i <= n; i++ {
 
