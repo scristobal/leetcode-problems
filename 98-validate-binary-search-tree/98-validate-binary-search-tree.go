@@ -1,43 +1,30 @@
 
-func subTreeMin(root *TreeNode) int {
-	if root == nil {
-		return math.MaxInt
-	}
-	return min(root.Val, min(subTreeMin(root.Left), subTreeMin(root.Right)))
+func isValidNode(root *TreeNode, min int, max int) bool {
 
-}
-func subTreeMax(root *TreeNode) int {
-	if root == nil {
-		return math.MinInt
-	}
-	return max(root.Val, max(subTreeMax(root.Left), subTreeMax(root.Right)))
-}
-
-func isValidBST(root *TreeNode) bool {
 	if root == nil {
 		return true
 	}
 
-	maxLeft := subTreeMax(root.Left)
-	minRight := subTreeMin(root.Right)
-
-	if maxLeft < root.Val && root.Val < minRight {
-		return isValidBST(root.Left) && isValidBST(root.Right)
+	if min != math.MaxInt && root.Val <= min {
+		return false
 	}
 
-	return false
+	if max != math.MinInt && root.Val >= max {
+		return false
+	}
+
+	if !isValidNode(root.Left, min, root.Val) {
+		return false
+	}
+
+	if !isValidNode(root.Right, root.Val, max) {
+		return false
+	}
+
+	return true
+
 }
 
-func max(a int, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func min(a int, b int) int {
-	if a < b {
-		return a
-	}
-	return b
+func isValidBST(root *TreeNode) bool {
+	return isValidNode(root, math.MaxInt, math.MinInt)
 }
