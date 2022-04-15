@@ -4,48 +4,24 @@
  * @return 	 	      true if current version is bad 
  *			          false if current version is good
  * func isBadVersion(version int) bool;
- */
+ */    
 
-func firstBadVersion(n int) int {
-        
-    step:= reduce(n) 
-    isPreviousBad := true
-    ind := n - step
-    fmt.Println("---")
-    for {
-        
-        isCurrentBad := isBadVersion(ind)
-        
-        
-        if ( step ==1) && isPreviousBad != isCurrentBad {
-            if isCurrentBad { return ind } 
-            if isPreviousBad { return ind + 1}
-        }
-        
-        step= reduce(step) 
 
-        isPreviousBad = isCurrentBad
-        
-        if isCurrentBad {
-            ind -= step
-            
-            continue
-        }
-        
-        ind += step
-    }
+  func firstBadVersion(n int) int {
+          
+    lo := 1
     
-    return -1
-}
-
-func reduce(n int) int {
+    for hi := n; lo < hi; {
+   
+      if mid := lo + (hi-lo)/2; isBadVersion(mid)    {
+        hi = mid                                                                   
+      } else {                                                                     
+        lo = mid + 1                                                                  
+      }            
     
-    r:=n/2
-
-    if r == 0 {
-        return r+1
-        
-    }
+        //fmt.Printf("(%v, %v)\n", lo, hi)
+    }                                                                              
     
-    return r
-}
+    // fmt.Printf("(%v, %v)\n", lo, hi)                                                           
+    return lo                                                                      
+  }    
