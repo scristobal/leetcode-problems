@@ -26,8 +26,6 @@ func maximumProduct(nums []int) int {
     }
     
   
-    fmt.Print("---")
-    fmt.Print(mins, maxs)
     
     min := mins[0]*mins[1]*maxs[2]
     max := maxs[0]*maxs[1]*maxs[2]
