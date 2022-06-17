@@ -1,14 +1,10 @@
 type SubrectangleQueries struct {
     values [][]int
-   
 }
 
 
 func Constructor(rectangle [][]int) SubrectangleQueries {
-    
     values := rectangle
-   
-    
     return SubrectangleQueries{values}
 }
 
