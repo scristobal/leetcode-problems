@@ -6,6 +6,7 @@
  *     Right *TreeNode
  * }
  */
+
 func rangeSumBST(root *TreeNode, low int, high int) int {
     
     if root == nil { return 0 }
@@ -16,9 +17,15 @@ func rangeSumBST(root *TreeNode, low int, high int) int {
         acc = root.Val
     }
     
-    acc += rangeSumBST(root.Left, low, high)
+    if low <= root.Val {
+        acc += rangeSumBST(root.Left, low, high)
+    }
     
-    acc += rangeSumBST(root.Right, low, high)
+    if root.Val <= high {
+        acc += rangeSumBST(root.Right, low, high)
+    }
     
     return acc
 }
+
+
