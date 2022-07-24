@@ -4,8 +4,8 @@ func findOcurrences(text string, first string, second string) []string {
     res := make([]string, len(words))
     j := 0
     
-    for i, w := range(words) {
-        if i+2 < len(words) && w == first && words[i+1] == second {
+    for i:=0; i < len(words); i++ {
+        if i+2 < len(words) && words[i] == first && words[i+1] == second {
             res[j] = words[i+2]
             j++
         }        
