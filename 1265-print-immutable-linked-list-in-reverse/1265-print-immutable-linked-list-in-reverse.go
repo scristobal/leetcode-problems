@@ -40,8 +40,19 @@ func printLinkedListInReverse(head ImmutableListNode) {
         node = node.getNext()
     }
     
+    // check if last segment has fewer elements
+    if k>0 {
+        left := 0
+        node = heads[k-1]
+        for node != nil {
+            left++
+            node = node.getNext()
+        }
+        helper(heads[k-1], left) 
+    }
+    
     // print node values from heads in reverse order
-    for i:=k-1; i>=0; i-- {
+    for i:=k-2; i>=0; i-- {
         helper(heads[i], stp)
     }
     
@@ -49,19 +60,7 @@ func printLinkedListInReverse(head ImmutableListNode) {
 
 func helper(head ImmutableListNode, size int) {
     
-    left := 0
-    
-    node := head
-    for node != nil {
-        left++
-        node = node.getNext()
-        if (left > size) { break }
-    }
-    
-    if left < size { 
-        size = left
-    }
- 
+
     for i:=0; i<size ; i++ {
         node := head
         for j:=0; j<(size-i-1) && node.getNext() != nil ; j++ {
