@@ -15,23 +15,58 @@
 
 func printLinkedListInReverse(head ImmutableListNode) {
 
+    // compute the size of the list
     size := 0
     
     node := head
-    
     for node != nil {
         size++
         node = node.getNext()
     }
     
-    for i:=0; i<size; i++ {
-        
-        node := head
-        for j:=0; j<(size-i-1); j++ {
-            node = node.getNext()
+
+    // get equidistant nodes
+    stp := int(math.Sqrt(float64(size))) + 1
+    
+    heads := make([]ImmutableListNode, stp)
+    
+    k, j, node := 0, 0, head
+    for node != nil {
+        if j % stp == 0 { 
+            heads[k] = node
+            k++
         }
-        
-        node.printValue()
+        j++
+        node = node.getNext()
     }
     
+    // print node values from heads in reverse order
+    for i:=k-1; i>=0; i-- {
+        helper(heads[i], stp)
+    }
+    
+}
+
+func helper(head ImmutableListNode, size int) {
+    
+    left := 0
+    
+    node := head
+    for node != nil {
+        left++
+        node = node.getNext()
+        if (left > size) { break }
+    }
+    
+    if left < size { 
+        size = left
+    }
+ 
+    for i:=0; i<size ; i++ {
+        node := head
+        for j:=0; j<(size-i-1) && node.getNext() != nil ; j++ {
+            node = node.getNext()
+        }
+        node.printValue()
+    }
 }
