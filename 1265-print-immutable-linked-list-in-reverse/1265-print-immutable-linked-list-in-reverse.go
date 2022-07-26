@@ -14,21 +14,24 @@
  */
 
 func printLinkedListInReverse(head ImmutableListNode) {
-    
-    r := make([]ImmutableListNode, 1000)
-    k := 0
+
+    size := 0
     
     node := head
     
     for node != nil {
-        r[k] = node
-        k++
+        size++
         node = node.getNext()
     }
     
-    for i := k-1; i >=0; i-- {
-        r[i].printValue()
+    for i:=0; i<size; i++ {
+        
+        node := head
+        for j:=0; j<(size-i-1); j++ {
+            node = node.getNext()
+        }
+        
+        node.printValue()
     }
-    
     
 }
