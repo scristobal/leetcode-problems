@@ -17,53 +17,44 @@ func printLinkedListInReverse(head ImmutableListNode) {
 
     // compute the size of the list
     size := 0
-    
-    node := head
-    for node != nil {
+    for node := head; node != nil; node = node.getNext() {
         size++
-        node = node.getNext()
     }
     
 
     // get equidistant nodes
-    stp := int(math.Sqrt(float64(size))) + 1
+    step := int(math.Sqrt(float64(size))) + 1
     
-    heads := make([]ImmutableListNode, stp)
+    heads := make([]ImmutableListNode, step)
     
-    k, j, node := 0, 0, head
-    for node != nil {
-        if j % stp == 0 { 
+    k := 0
+    for j, node := 0, head; node != nil; j, node = j+1, node.getNext() {
+        if j % step == 0 { 
             heads[k] = node
             k++
         }
-        j++
-        node = node.getNext()
     }
     
-    // check if last segment has fewer elements
+    // print last chunck, might be smaller
     if k>0 {
-        left := 0
-        node = heads[k-1]
-        for node != nil {
-            left++
-            node = node.getNext()
+        sizeLast := 0
+        for node := heads[k-1]; node != nil; node = node.getNext() {
+            sizeLast++
         }
-        helper(heads[k-1], left) 
+        printNReverse(heads[k-1], sizeLast) 
     }
     
-    // print node values from heads in reverse order
+    // print the rest in chunks
     for i:=k-2; i>=0; i-- {
-        helper(heads[i], stp)
+        printNReverse(heads[i], step)
     }
     
 }
 
-func helper(head ImmutableListNode, size int) {
-    
-
-    for i:=0; i<size ; i++ {
+func printNReverse(head ImmutableListNode, n int) {
+    for i:=0; i<n ; i++ {
         node := head
-        for j:=0; j<(size-i-1) && node.getNext() != nil ; j++ {
+        for j:=0; j<(n-i-1) && node.getNext() != nil ; j++ {
             node = node.getNext()
         }
         node.printValue()
