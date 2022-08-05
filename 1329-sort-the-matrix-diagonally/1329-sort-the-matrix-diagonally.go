@@ -33,13 +33,13 @@ func diagonalSort(mat [][]int) [][]int {
     
     for i:=0; i< len(mat[0]); i++ {
         d := diag(mat,0,i)
-        sort.Slice(d, func(i,j int) bool { return d[i] < d[j]})
+        sort.Ints(d)
         replace(mat, d, 0, i)
     }
     
     for i:=1; i<len(mat); i++{
         d := diag(mat,i,0)
-        sort.Slice(d, func(i,j int) bool { return d[i] < d[j]})
+        sort.Ints(d)
         replace(mat, d, i, 0)
     }
     
