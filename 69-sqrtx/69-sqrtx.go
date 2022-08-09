@@ -1,15 +1,11 @@
 func mySqrt(x int) int {
-    
-    if x == 0 {
-		return 0
-	}
 
-    est := x
+    r := x
 
-	for est*est > x {
+	for r*r > x {
 		
-		est = (est + (x / est)) / 2
+		r = (r + (x / r)) / 2
 	}
 
-	return est
+	return r
 }
