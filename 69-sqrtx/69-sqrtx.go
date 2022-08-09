@@ -4,15 +4,12 @@ func mySqrt(x int) int {
 		return 0
 	}
 
-	N := float64(x)
+    est := x
 
-    prev := float64(1)
-	est := N
-
-	for math.Abs(est-prev) > 0.5 {
-		prev = est
-		est = (prev + (N / prev)) / 2
+	for est*est > x {
+		
+		est = (est + (x / est)) / 2
 	}
 
-	return int(est)
+	return est
 }
