@@ -8,10 +8,10 @@ impl Solution {
         for (i, v) in nums.iter().enumerate() {
             
             let diff = target-v;
-            let prev = visited.get_key_value(&diff);
+            let prev = visited.get(&diff);
             
             match prev {
-                Some((_,&j)) => return vec![j,i as i32],
+                Some(&j) => return vec![j,i as i32],
                 _ => visited.insert(v, i as i32),
             };
             
