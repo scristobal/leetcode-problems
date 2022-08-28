@@ -1,7 +1,5 @@
 
 use std::collections::BinaryHeap;
-
-
 impl Solution {
     pub fn find_kth_largest(nums: Vec<i32>, k: i32) -> i32 {
         let mut heap = BinaryHeap::with_capacity(nums.len());
@@ -14,6 +12,6 @@ impl Solution {
             heap.pop();
         }
 
-        heap.pop().unwrap()
+        *heap.peek().unwrap()
     }
 }
