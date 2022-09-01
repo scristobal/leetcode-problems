@@ -17,7 +17,7 @@ func goodNodesBounded(root *TreeNode, max int) int {
     
     acc := goodNodesBounded(root.Left, max) + goodNodesBounded(root.Right, max);
     
-    if root.Val >= max { acc +=1 }
+    if root.Val >= max { acc ++ }
     
     return acc
 }
