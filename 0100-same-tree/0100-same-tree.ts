@@ -24,10 +24,8 @@ function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
         return false
     }
     
-    if (p.val !== q.val) return false
+    if (p.left===null  && p.right===null  && q.left===null && q.right===null && p.val===q.val  ) return true 
     
-    if (p.left===null  && p.right===null  && q.left===null && q.right===null ) return true 
-    
-    return isSameTree(p.right, q.right) && isSameTree(p.left, q.left)
+    return p.val === q.val && isSameTree(p.right, q.right) && isSameTree(p.left, q.left)
     
 };
