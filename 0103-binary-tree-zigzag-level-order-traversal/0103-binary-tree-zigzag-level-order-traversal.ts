@@ -16,9 +16,9 @@ function zigzagLevelOrder(root: TreeNode | null): number[][] {
     
     if (root === null) return [];
        
-    let isEvenLvl = true; // lvl starts at 1 for root, hence root is an even lvl
-    const res= [[root.val]];
-    let nextLvl = [root.left, root.right];
+    let isEvenLvl = false; // lvl starts at 1 for root, hence root is an even lvl
+    const res= [];
+    let nextLvl = [root];
     
     while (nextLvl.length > 0 ) {
         
