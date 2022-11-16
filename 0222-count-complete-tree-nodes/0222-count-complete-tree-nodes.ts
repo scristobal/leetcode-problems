@@ -15,32 +15,24 @@
 function countNodes(root: TreeNode | null): number {
 
     if (root === null) return 0
-    
-    let res = 0;
-    let depth = 0;
-    
+  
+    let depthMax = 0;
     let nextNode = root;
     
     while (nextNode !== null) {
-        res += 2**depth;
-        depth++;
+        depthMax++;
         nextNode = nextNode.left;
     }
     
-    
-    let depthRight = 0;
-    let prevNode = root;
-    
+    let depthMin = 0;
     nextNode = root;
     
     while (nextNode !== null){
-        depthRight++;
-        prevNode = nextNode;
+        depthMin++;
         nextNode = nextNode.right;
     }
     
-    
-    if (depth === depthRight) return res
+    if (depthMax === depthMin) return 2**depthMax-1
     
     return 1 + countNodes(root.left) + countNodes(root.right)
 };
