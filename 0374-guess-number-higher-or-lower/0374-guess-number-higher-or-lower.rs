@@ -10,26 +10,19 @@
 impl Solution {
     unsafe fn guessNumber(n: i32) -> i32 {
         
-        let (mut l, mut h) = (1, n);
-        
-        let mut g = l + (h-l)/2;
-        let mut r = guess(g);
+        let (mut low, mut high) = (1, n + 1);
     
-        while r != 0 {
-            if r == -1 {
-                h = g;
-            } else {
-                if g != l {
-                    l = g;
-                } else {
-                    l = g + 1;
-                }
-            }
+        loop {
             
-            g = l + (h-l)/2;
-            r = guess(g);
+            let mut mid = low + (high-low)/2;
+            
+            match guess(mid) {
+                -1 => { high = mid; }
+                1 => { low = mid + 1; }
+                0 => { break mid}
+                _ => { break -1 }
+            }    
         }
         
-        g
     }
 }
