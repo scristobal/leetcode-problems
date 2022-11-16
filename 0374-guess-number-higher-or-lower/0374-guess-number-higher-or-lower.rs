@@ -17,10 +17,10 @@ impl Solution {
             let mut mid = low + (high-low)/2;
             
             match guess(mid) {
-                -1 => { high = mid; }
-                1 => { low = mid + 1; }
-                0 => { break mid}
-                _ => { break -1 }
+                -1 => high = mid,
+                1 => low = mid + 1,
+                0 => break mid,
+                _ => break -1,
             }    
         }
         
