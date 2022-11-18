@@ -3,20 +3,9 @@ func isUgly(n int) bool {
     if n <= 0 { return false }
     if n == 1  { return true }
     
-    r := n;
+    for n % 2 == 0 { n = n/2 }
+    for n % 3 == 0 { n = n/3 }  
+    for n % 5 == 0 { n = n/5 }
     
-    for r % 2 == 0 {
-        r = r/2;
-    }
-    
-    for r % 3 == 0 {
-        r = r/3;
-    }
-    
-    for r % 5 == 0 {
-        r = r/5;
-    }
-    
-    if r == 1 { return true }
-    return false
+    return n == 1 
 }
