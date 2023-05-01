@@ -11,7 +11,7 @@ var solution = function(read4: any) {
     let i = -1
     
     return function(buf: string[], n: number): number {
-        const chars = []
+        const chars = Array(4)
         
         while (n>0) {
             
