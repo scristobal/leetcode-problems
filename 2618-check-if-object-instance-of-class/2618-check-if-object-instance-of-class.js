@@ -4,7 +4,6 @@
  * @return {boolean}
  */
 var checkIfInstanceOf = function(obj, classFunction) {
-    console.log(obj, classFunction)
    return obj !== null && obj !== undefined && typeof classFunction === 'function'  &&  Object(obj) instanceof classFunction 
 };
 
