@@ -4,23 +4,10 @@
  * @return {boolean}
  */
 var checkIfInstanceOf = function(obj, classFunction) {
-    
-    if (isNullable(obj) || isNullable(classFunction)) { return false }
-    
-    let proto = Object.getPrototypeOf(obj) 
-    
-    while (proto){
-        if (proto === classFunction.prototype){ return true }
-        
-        proto = Object.getPrototypeOf(proto) 
-    }
-    return false
+    console.log(obj, classFunction)
+   return obj !== null && obj !== undefined && typeof classFunction === 'function'  &&  Object(obj) instanceof classFunction 
 };
 
 /**
  * checkIfInstanceOf(new Date(), Date); // true
  */
-
-const isNullable = function(obj) {
-    return (obj ?? true) === true
-}
