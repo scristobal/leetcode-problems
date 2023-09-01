@@ -4,27 +4,36 @@
  * @return {any[]}
  */
 var flat = function (arr, n) {
-    let res = arr
-    for (let i=0; i<n; i++) {
-        res = flatOne(res)
-    }
-    return res
-};
-
-/**
- * @param {any[]} arr
- * @return {any[]}
- */
-function flatOne(arr) {
-    const res = []
-    for (const elem of arr) {
-        if (Array.isArray(elem)) {
-            for (const nested of elem) {
-                res.push(nested)
+    
+    const input = JSON.stringify(arr);
+    let output = "["
+    let depth = -1
+    for (const char of input) {
+        switch (char) {
+            case '[' : {
+                depth++
+                if (depth > n){
+                    output+=char
+                }
+                continue;
             }
-        } else {
-            res.push(elem)
+            case ']': {
+                if (depth > n){
+                    output+=char
+                }
+                depth--
+                continue;
+            }
+           
+            default:
+                output+=char
         }
     }
-    return res
-}
+    
+    output+="]"
+    
+    output=output.replaceAll(",,","").replaceAll("[,", "[").replaceAll(",]","]")
+
+    return JSON.parse(output)
+   
+};
