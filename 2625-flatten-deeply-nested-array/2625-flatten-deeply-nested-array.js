@@ -4,36 +4,28 @@
  * @return {any[]}
  */
 var flat = function (arr, n) {
-    
-    const input = JSON.stringify(arr);
-    let output = "["
-    let depth = -1
-    for (const char of input) {
-        switch (char) {
-            case '[' : {
-                depth++
-                if (depth > n){
-                    output+=char
-                }
+
+    const res = [];
+
+    function diveIn(input, level) {
+        for(const item of input) {
+            if(Number.isInteger(item)) {
+                res.push(item);
                 continue;
-            }
-            case ']': {
-                if (depth > n){
-                    output+=char
-                }
-                depth--
+            }  
+            
+            if(level >= n) {
+                res.push(item);
                 continue;
-            }
-           
-            default:
-                output+=char
+            } 
+                
+            diveIn(item, level+1);
+            
         }
     }
-    
-    output+="]"
-    
-    output=output.replaceAll(",,","").replaceAll("[,", "[").replaceAll(",]","]")
 
-    return JSON.parse(output)
-   
+    diveIn(arr, 0);
+
+    return res;
 };
+   
