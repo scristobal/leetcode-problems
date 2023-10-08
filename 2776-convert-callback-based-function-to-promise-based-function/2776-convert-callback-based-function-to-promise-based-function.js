@@ -3,19 +3,29 @@
  * @return {Function<Promise<number>>}
  */
 var promisify = function(fn) {
- 	return async function(...args) {
+//  	return async function(...args) {
         
-        let res
+//         let res
         
-        const callback = (value, error) => {
-            if (error) throw (error)
-            res = value
-        }
+//         const callback = (value, error) => {
+//             if (error) throw (error)
+//             res = value
+//         }
         
-        fn(callback, ...args)
+//         fn(callback, ...args)
         
-        return res
-	}
+//         return res
+// 	}
+    
+    return function(...args){
+        return new Promise((resolve, reject) => {
+            const callback = (value, error) => {
+                if (error) reject(error)
+                else resolve(value)
+            }          
+            fn(callback, ...args)
+        })
+    }
 };
 
 /**
