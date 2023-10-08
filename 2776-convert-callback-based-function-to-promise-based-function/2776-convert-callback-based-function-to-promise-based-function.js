@@ -9,7 +9,6 @@ var promisify = function(fn) {
         
         const callback = (value, error) => {
             if (error) throw (error)
-            console.log(value)
             res = value
         }
         
