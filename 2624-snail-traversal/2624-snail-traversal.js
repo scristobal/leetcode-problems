@@ -22,13 +22,9 @@ Array.prototype.snail = function(rowsCount, colsCount) {
         
         indices[i] = factor*L + offset;
         
-        if (offset===0) {
-            offset = -1;
-            factor++
-        } else {
-            offset = 0
-        }
-    
+        const delta = 1+offset
+        factor += delta;
+        offset = -delta;
     }
     
     //   0                            9  10                                19
@@ -39,14 +35,12 @@ Array.prototype.snail = function(rowsCount, colsCount) {
     const row = new Uint16Array(colsCount);
           
     for (let r=0; r<rowsCount; r++){
-       
         
         for (let c=0; c<colsCount; c++){
             row[c] = this[indices[c]]
         }
         
         res[r] = Array.from(row)
-        
         
         // update indices ...
         // r=0 -> [0*L,     1*L-1,     1*L,     2*L-1,   2*L,   ... ];
@@ -57,9 +51,7 @@ Array.prototype.snail = function(rowsCount, colsCount) {
             indices[i] = indices[i] + offset
             offset*=-1
         }
-        
-   
-}
+    }
     
     return res
 }
