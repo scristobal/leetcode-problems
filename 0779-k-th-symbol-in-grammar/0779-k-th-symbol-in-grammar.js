@@ -16,23 +16,8 @@ var kthGrammar = function(n, k) {
 
     let p = 0;
     for (const m of seq){
-        p = succ(p,m)
+        p = p!=m // succesor m is 0=L, 1=R
     }
 
     return p
 };
-
-
-function succ(n, s /* L=0  R =1 */) {
-        return n != s ? 1 : 0
-        // 0,0 -> 0
-        // 0,1 -> 1
-        // 1,0 -> 1
-        // 1,1 -> 0
-        if (n ===0) { // 0 -> 01
-            if (s === 0) return 0
-            return 1
-        } // 1 -> 10
-        if (s === 0) return 1
-        return 0
-    }
