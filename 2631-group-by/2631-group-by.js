@@ -4,11 +4,11 @@
  */
 Array.prototype.groupBy = function(fn) {
     
-    const o = new Object();
+    const o = {};
     
     for (const i of this) {
         const r = fn(i);
-        if (o[r] !== undefined) {
+        if (o[r]) {
             o[r].push(i)
         } else {
             o[r] = [i]
