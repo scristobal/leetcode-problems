@@ -8,11 +8,8 @@ Array.prototype.groupBy = function(fn) {
     
     for (let i=0; i<this.length; i++) {
         const r = fn(this[i]);
-        if (o[r]) {
-            o[r].push(this[i])
-        } else {
-            o[r] = [this[i]]
-        }
+        
+        o[r]? o[r].push(this[i]): o[r] = [this[i]];
     }
     
     return o
