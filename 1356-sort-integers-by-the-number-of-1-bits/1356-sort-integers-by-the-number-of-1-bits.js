@@ -3,16 +3,11 @@
  * @return {number[]}
  */
 var sortByBits = function(arr) {
-    const cache = new Map();
-    
-    // arr.forEach((n) => {
-    //     console.log("n",n)
-    //     console.log("bits", numBits(n))
-    // })
+  
     
     return arr.sort((a,b) => {
-        const bA = numBits(a, cache);
-        const bB = numBits(b,cache);
+        const bA = numBits(a);
+        const bB = numBits(b);
         
         const d = bA - bB;
         
@@ -22,23 +17,22 @@ var sortByBits = function(arr) {
 };
 
 
-function numBits(n, cache){
+function numBits(n){
     if (n===0) return 0;
     
-    const c = cache.get(n)
-    
-    if (c) return c
+  
     
     const h = Math.floor(n/2);
 
     if ( (n % 2) === 1) {
-        const b = numBits(h, cache) + 1;
-        cache.set(n, b)
+        const b = numBits(h) + 1;
+      
         return b
     }
     
-    const b = numBits(h,cache);
-    cache.set(n,b);
+    const b = numBits(h);
+    
     return b
     
 };
+
