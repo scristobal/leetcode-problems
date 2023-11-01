@@ -1,10 +1,8 @@
 impl Solution {
     pub fn find_array(pref: Vec<i32>) -> Vec<i32> {
-        let mut res = pref.windows(2).map(|a| a[0] ^ a[1]).collect::<Vec<_>>();
-
-        res.insert(0, pref[0]);
-
-        res
+         std::iter::once(pref[0])
+            .chain(pref.windows(2).map(|a| a[0] ^ a[1]))
+            .collect::<Vec<_>>()
     }
 }
 
