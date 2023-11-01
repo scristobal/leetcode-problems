@@ -21,36 +21,34 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 impl Solution {
     pub fn find_mode(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-    let mut count = HashMap::new();
-    let mut stack = vec![];
+         let mut count = HashMap::new();
+        let mut max = 0;
+        let mut stack = vec![];
 
-    stack.push(root);
+        stack.push(root);
 
-    while let Some(node) = stack.pop() {
-        match node {
-            Some(node) => {
-                let node = node.borrow();
+        while let Some(node) = stack.pop() {
+            match node {
+                Some(node) => {
+                    let node = node.borrow();
 
-                count.entry(node.val).and_modify(|e| *e += 1).or_insert(1);
-                stack.push(node.left.clone());
-                stack.push(node.right.clone());
-            }
-            None => continue,
-        }
-    }
+                    count.entry(node.val).and_modify(|e| *e += 1).or_insert(1);
 
-    count
-        .into_iter()
-        .fold((vec![], 0), |(mut modes, max), (val, count)| {
-            match count.cmp(&max) {
-                std::cmp::Ordering::Greater => (vec![val], count),
-                std::cmp::Ordering::Equal => {
-                    modes.push(val);
-                    (modes, max)
+                    if count[&node.val] > max {
+                        max = count[&node.val];
+                    }
+
+                    stack.push(node.left.clone());
+                    stack.push(node.right.clone());
                 }
-                _ => (modes, max),
+                None => continue,
             }
-        })
-        .0
-}
+        }
+
+        count
+            .into_iter()
+            .filter(|(_, v)| *v == max)
+            .map(|(k, _)| k)
+            .collect()
+    }
 }
