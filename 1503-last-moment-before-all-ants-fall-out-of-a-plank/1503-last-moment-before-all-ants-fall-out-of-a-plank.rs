@@ -7,7 +7,6 @@ impl Solution {
                 .into_iter()
                 .map(|l| n-l ))
             .max()
-            .or(Some(0))
-            .unwrap()
+            .unwrap_or(0)
     }
 }
