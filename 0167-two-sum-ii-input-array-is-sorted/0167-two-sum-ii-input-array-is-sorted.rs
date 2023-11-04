@@ -3,17 +3,12 @@ impl Solution {
         let mut i = 0;
         let mut j = numbers.len()-1;
 
-        let mut r = numbers[i] + numbers[j];
-
-        while r != target {
-            
-            match r.cmp(&target) {
-                std::cmp::Ordering::Less => i +=1,
-                std::cmp::Ordering::Equal => unreachable!(),
-                std::cmp::Ordering::Greater => j -=1,
+        loop {
+            match target.cmp(&(numbers[i] + numbers[j])) {
+                std::cmp::Ordering::Less => j -=1,
+                std::cmp::Ordering::Equal => break,
+                std::cmp::Ordering::Greater => i +=1,
             }
-           
-            r = numbers[i] + numbers[j];
         }
 
         vec![i as i32 +1, j as i32 +1]
